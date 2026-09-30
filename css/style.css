@@ -21,7 +21,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 20;
 }
 
 body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-size: 16px;
@@ -80,7 +80,7 @@ hr { margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #f1
 .space-large { padding-top: 120px; padding-bottom: 120px; }
 .space-ex-large { padding-top: 140px; padding-bottom: 140px; }
 
-.menu-spacer { padding: 120px 0 130px 0; }
+.menu-spacer { padding: 120px 0 130px 0; position: relative; z-index: 2; background-color: #fff; }
 .service-spacer { padding: 110px 0 120px 0; }
 .review-spacer { padding: 110px 0 150px 0; }
 
@@ -130,11 +130,60 @@ hr { margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #f1
     border-radius: 42% !important;
 }
 
-.hero-section { background:url(../images/hero-img-6.png) no-repeat; background-position: 85% 100%; background-size: 800px 800px; background-color: rgb(237, 183, 13); padding: 250px 0 0 0; height: 100vh; }
-.hero-caption { padding-top: 50px; padding-bottom: 170px; }
-#hero-button { padding: 0 0 0 10px; }
-.hero-title { font-size: 40px; color: #fff; line-height: 50px; font-weight: 600; background-color: rgba(237, 183, 13, 0.5); margin-bottom: 30px; margin-top: 50px; text-transform:uppercase; padding: 5px 10px; border-radius: 10px; }
-.hero-text { font-size: 16px; color: #fff; margin-bottom: 60px;  background-color: rgba(237, 183, 13, 0.5); padding: 5px 10px; border-radius: 10px; }
+.hero-section { background-color: rgb(237, 183, 13); padding: 150px 0 0 0; min-height: 100vh; overflow: hidden; box-sizing: border-box; }
+.hero-caption { padding-top: 50px; padding-bottom: 40px; position: relative; z-index: 0; }
+#hero-button { padding: 0; }
+.hero-title { font-size: 40px; color: #fff; line-height: 50px; font-weight: 600; background-color: transparent; margin-bottom: 30px; margin-top: 20px; text-transform:uppercase; padding: 0; border-radius: 0; }
+.hero-text { font-size: 16px; color: #fff; margin-bottom: 40px; background-color: transparent; padding: 0; border-radius: 0; }
+
+.hero-shirts {
+    position: relative;
+    height: 680px;
+    width: 115%;
+    max-width: none;
+    margin: 50px -140px 0 50px;
+    perspective: 900px;
+    z-index: 0;
+}
+.hero-shirt {
+    position: absolute;
+    width: 84%;
+    height: auto;
+    filter: drop-shadow(0 22px 26px rgba(80, 30, 10, 0.28));
+    transform-style: preserve-3d;
+    pointer-events: none;
+    user-select: none;
+}
+.hero-shirt.shirt-back {
+    left: 2%;
+    top: 14%;
+    width: 76%;
+    z-index: 1;
+    transform: rotate(-16deg) rotateY(18deg);
+    animation: floatShirt 6.5s ease-in-out infinite;
+}
+.hero-shirt.shirt-mid {
+    right: -28%;
+    top: 16%;
+    width: 76%;
+    z-index: 2;
+    transform: rotate(14deg) rotateY(-12deg);
+    animation: floatShirt 7.2s ease-in-out infinite reverse;
+    animation-delay: -1.4s;
+}
+.hero-shirt.shirt-front {
+    left: 24%;
+    top: 6%;
+    width: 86%;
+    z-index: 3;
+    transform: rotate(-4deg);
+    animation: floatShirt 5.8s ease-in-out infinite;
+    animation-delay: -0.6s;
+}
+@keyframes floatShirt {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -12px; }
+}
  
 #navigation, #navigation ul, #navigation ul li, #navigation ul li a, #navigation #menu-button { margin: 0; padding: 0; border: 0; list-style: none; line-height: 1; 
     display: block; position: relative; -webkit-box-sizing: border-box;  -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -207,19 +256,37 @@ address { margin-bottom: 20px; font-style: normal; line-height: 1.43; }
 .menu-list ul li { margin-bottom:20px; }
 .meta-price { color:#d41b2c; font-size:17px; font-weight:800;}
 
-@media screen and (max-height: 918px) {
-    .hero-section { background-position: 85% 300%; }
+@media screen and (max-width: 1199px) {
+    .hero-shirts { height: 600px; width: 110%; margin: 30px -60px 0 10px; }
+    .hero-shirt.shirt-mid { right: -18%; top: 14%; }
+    .hero-shirt.shirt-front { left: 20%; top: 4%; }
+}
+@media screen and (max-width: 991px) {
+    .hero-section { min-height: 100vh; height: 100vh; overflow: hidden; padding-top: 150px; }
+    .hero-shirts { height: 420px; width: 100%; margin: 28px auto 0 auto; z-index: 0; }
+    .hero-shirt.shirt-front { width: 82%; left: 10%; top: 18%; z-index: 0; }
+    .hero-shirt.shirt-mid { right: -10%; top: 26%; width: 72%; z-index: 0; }
+    .hero-shirt.shirt-back { left: -8%; top: 24%; width: 72%; z-index: 0; }
 }
 @media screen and (max-width: 768px) {
     #header-logo > a { float: none; display: flex; justify-content: center; }
     #navigation { margin-top: 8px; }
     #navigation > ul { float: none; display: flex; justify-content: center; }
     #navigation > ul > li { padding: 0 0 0 10px; }
-    .hero-caption { padding: 0 0 120px 0; }
-    .hero-section { background-position: 0% 150%; background-size: 600px 600px; }
+    .hero-section { padding-top: 170px; min-height: 100vh; height: 100vh; overflow: hidden; }
+    .hero-caption { padding: 6px 0 6px 0; }
+    .hero-shirts { height: 380px; margin: 16px auto 0 auto; }
+    .hero-shirt.shirt-front { top: 22%; }
+    .hero-shirt.shirt-mid { top: 30%; }
+    .hero-shirt.shirt-back { top: 28%; }
 }
 @media screen and (max-width: 574px) {
-    .hero-caption { padding: 0 18px 120px 18px; }
+    .hero-caption { padding: 0 18px 6px 18px; }
     .service-block { padding: 0 24px; }
-    .hero-section { height: 120vh; }
+    .hero-title { font-size: 32px; line-height: 40px; }
+    .hero-section { padding-top: 180px; min-height: 100vh; height: 100vh; }
+    .hero-shirts { height: 340px; margin: 8px auto 0 auto; }
+    .hero-shirt.shirt-back { left: -12%; top: 28%; width: 78%; }
+    .hero-shirt.shirt-mid { right: -14%; top: 30%; width: 78%; }
+    .hero-shirt.shirt-front { left: 8%; width: 86%; top: 22%; }
 }
